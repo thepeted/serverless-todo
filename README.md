@@ -1,7 +1,7 @@
 # Serverless Todo API Service
 
 ## Description
-A serverless express.js RESTful API for managing a list of "todos" stored in an AWS Dynamo DB. 
+A [Serverless](https://serverless.com) RESTful API built with express.js for managing a list of "todos" stored in an AWS Dynamo DB. 
 
 ## Example API Usage
 
@@ -19,21 +19,23 @@ returns all todos
 
 ```
 add a todo:
-`$ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/todos -d '{"completed": true, "text": "use uuid"}'`
-`
-fetch a single todo
-`curl {BASE_DOMAIN}/todos/{id}`
+```
+$ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/todos -d '{"completed": true, "text": "use uuid"}'`
+```
+fetch a single todo:
+```
+curl {BASE_DOMAIN}/todos/{id}
+```
 
-delete a todo
-`curl -X DELETE {BASE_DOMAIN}/todos/{id}`
+delete a todo:
+```
+curl -X DELETE {BASE_DOMAIN}/todos/{id}
+```
 
-## Run locally
+## Build and Deploy
 
 ```
 npm install -g serverless
 npm install
-serverless offline start 
+serverless deploy
 ```
-
-## What's Serverless?
-[Serverless](https://serverless.com) is a framework that we use to automate deployment to an AWS stack.
