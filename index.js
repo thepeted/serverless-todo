@@ -26,6 +26,26 @@ app.get('/todos', function (req, res) {
   })
 })
 
+// Get a single todo
+app.get('/todo/:todoId', function (req, res) {
+  const { todoId } = req.params
+  const params = {
+    TableName: TODOS_TABLE,
+    Key: {
+      todoId: todoId
+    }
+  }
+
+  dynamoDb.get(params, (error, data) => {
+    if (error) {
+      console.log(error)
+      return res.send(404).json({ error: 'Could not find todo with Id: ' + todoId })
+    } else {
+      return res.json(data.Item)
+    }
+  })
+})
+
 // Create todo
 app.post('/todos', function (req, res) {
   const { completed, text } = req.body
