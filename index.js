@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const AWS = require('aws-sdk')
+const uuidv1 = require('uuid/v1')
 
 const TODOS_TABLE = process.env.TODOS_TABLE
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
@@ -27,19 +28,22 @@ app.get('/todos', function (req, res) {
 
 // Create todo
 app.post('/todos', function (req, res) {
-  const { todoId, completed, text } = req.body
+  const { completed, text } = req.body
 
   // validate body
   if (
-    todoId === undefined || completed === undefined || text === undefined ||
-    typeof todoId !== 'string' || typeof completed !== 'boolean' || typeof text !== 'string'
+    completed === undefined || text === undefined ||
+    typeof completed !== 'boolean' || typeof text !== 'string'
   ) {
-    return res.status(400).json({ error: 'request body must contain valid "todoId", "completed" and "text" values' })
+    return res.status(400).json({ error: 'request body must contain valid "completed" and "text" values' })
   }
 
-  const timestamp = new Date().getTime()
-  const item = { todoId, timestamp, completed, text }
-
+  const item = {
+    todoId: uuidv1(),
+    timestamp: new Date().getTime(),
+    completed,
+    text
+  }
   const params = {
     TableName: TODOS_TABLE,
     Item: item
