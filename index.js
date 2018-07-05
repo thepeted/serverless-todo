@@ -27,7 +27,7 @@ app.get('/todos', function (req, res) {
 })
 
 // Get a single todo
-app.get('/todo/:todoId', function (req, res) {
+app.get('/todos/:todoId', function (req, res) {
   const { todoId } = req.params
   const params = {
     TableName: TODOS_TABLE,
@@ -83,7 +83,7 @@ app.post('/todos', function (req, res) {
 })
 
 // Delete todo
-app.delete('/todo/:todoId', function (req, res) {
+app.delete('/todos/:todoId', function (req, res) {
   const { todoId } = req.params
   const params = {
     TableName: TODOS_TABLE,
