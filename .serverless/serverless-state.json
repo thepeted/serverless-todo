@@ -133,7 +133,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/todo-service/dev/1530827541725-2018-07-05T21:52:21.725Z/todo-service.zip"
+                "S3Key": "serverless/todo-service/dev/1530829102431-2018-07-05T22:18:22.431Z/todo-service.zip"
               },
               "FunctionName": "todo-service-dev-app",
               "Handler": "index.handler",
@@ -157,14 +157,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionDvmIGb8ZDdRJkjtt4eqR9C1tOkydabnzVPb5ZHaYkM": {
+          "AppLambdaVersionlJ6AVHTNINXhFfsfKHr0PCJPW69OLVDKUvFgd7RGhE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "30jIHRI1sP7RPwOkfYHwfiuJKZzM8Tc1YcSmnNVJrFo="
+              "CodeSha256": "QT1ULXd4td54crmgqaI46rp0NwKnlVdtyM2+9Otb/Kw="
             }
           },
           "ApiGatewayRestApi": {
@@ -274,7 +274,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1530827541815": {
+          "ApiGatewayDeployment1530829102497": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -352,7 +352,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionDvmIGb8ZDdRJkjtt4eqR9C1tOkydabnzVPb5ZHaYkM"
+              "Ref": "AppLambdaVersionlJ6AVHTNINXhFfsfKHr0PCJPW69OLVDKUvFgd7RGhE"
             }
           },
           "ServiceEndpoint": {
@@ -439,7 +439,7 @@
     "artifact": "/Users/Peter/dev/todo-service/.serverless/todo-service.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/todo-service/dev/1530827541725-2018-07-05T21:52:21.725Z",
+    "artifactDirectoryName": "serverless/todo-service/dev/1530829102431-2018-07-05T22:18:22.431Z",
     "artifact": "todo-service.zip"
   }
 }

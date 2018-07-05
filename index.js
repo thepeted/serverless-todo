@@ -19,7 +19,7 @@ app.get('/todos', function (req, res) {
   dynamoDb.scan(params, (error, data) => {
     if (error) {
       console.log(error)
-      return res.send(404).json({ error: 'Could not get todos' })
+      return res.status(404).json({ error: 'Could not get todos' })
     } else {
       return res.json(data.Items)
     }
@@ -37,12 +37,17 @@ app.get('/todo/:todoId', function (req, res) {
   }
 
   dynamoDb.get(params, (error, data) => {
+    console.log('trying..' + data)
     if (error) {
       console.log(error)
-      return res.send(404).json({ error: 'Could not find todo with Id: ' + todoId })
-    } else {
-      return res.json(data.Item)
+      return res.status(500).json({ error: 'Could not get todo' })
     }
+
+    if (!data.Item) {
+      return res.status(404).json({ error: 'Could not find todo with id: ' + todoId })
+    }
+
+    return res.json(data.Item)
   })
 })
 
