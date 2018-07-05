@@ -111,7 +111,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/todo-service/dev/1530830182215-2018-07-05T22:36:22.215Z/todo-service.zip"
+          "S3Key": "serverless/todo-service/dev/1530831300763-2018-07-05T22:55:00.763Z/todo-service.zip"
         },
         "FunctionName": "todo-service-dev-app",
         "Handler": "index.handler",
@@ -135,14 +135,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersionkVdJWe3XSM83iqjyTDhuhpQzuPHkdc3iidGy2Xsqk": {
+    "AppLambdaVersiongilNNyZu8zRw0rcu2aOdB16ixKEgn1fbQooqFP1fYz0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "9aazi0BozTXDeCk5Ht+b8EIPD+xZezPiDdWkrc3VoPk="
+        "CodeSha256": "AIV7fooTl3jVXpPixwZuDz0p/d3tZ4YlMwnIHTZiDCk="
       }
     },
     "ApiGatewayRestApi": {
@@ -252,7 +252,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1530830182281": {
+    "ApiGatewayDeployment1530831300824": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -330,7 +330,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionkVdJWe3XSM83iqjyTDhuhpQzuPHkdc3iidGy2Xsqk"
+        "Ref": "AppLambdaVersiongilNNyZu8zRw0rcu2aOdB16ixKEgn1fbQooqFP1fYz0"
       }
     },
     "ServiceEndpoint": {
