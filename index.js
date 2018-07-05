@@ -37,7 +37,6 @@ app.get('/todo/:todoId', function (req, res) {
   }
 
   dynamoDb.get(params, (error, data) => {
-    console.log('trying..' + data)
     if (error) {
       console.log(error)
       return res.status(500).json({ error: 'Could not get todo' })
@@ -80,6 +79,26 @@ app.post('/todos', function (req, res) {
       return res.status(400).json({ error: 'Could not create todo' })
     }
     res.json(item)
+  })
+})
+
+// Delete todo
+app.delete('/todo/:todoId', function (req, res) {
+  const { todoId } = req.params
+  const params = {
+    TableName: TODOS_TABLE,
+    Key: {
+      todoId
+    },
+    ConditionExpression: 'attribute_exists(todoId)'
+  }
+
+  dynamoDb.delete(params, (error) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json({ error: 'Could not delete todo with id: ' + todoId })
+    }
+    return res.sendStatus(204)
   })
 })
 
