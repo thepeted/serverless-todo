@@ -5,6 +5,7 @@ const app = express()
 const AWS = require('aws-sdk')
 const uuidv1 = require('uuid/v1')
 
+const generateUpdateParams = require('./utils/generateUpdateParams')
 const isValidBody = require('./utils/isValidBody')
 
 const TODOS_TABLE = process.env.TODOS_TABLE
@@ -81,6 +82,38 @@ app.post('/todos', function (req, res) {
       return res.status(400).json({ error: 'Could not create todo' })
     }
     res.json(item)
+  })
+})
+
+// Update todo
+app.put('/todos/:todoId', function (req, res) {
+  if (!isValidBody(req.body)) {
+    return res.status(400).json({ error: 'request body must contain valid values' })
+  }
+  const { todoId } = req.params
+
+  const params = {
+    TableName: TODOS_TABLE,
+    Key: {
+      todoId
+    },
+    ConditionExpression: 'attribute_exists(todoId)',
+    ReturnValues: 'UPDATED_NEW',
+    ...generateUpdateParams(req.body)
+  }
+
+  dynamoDb.update(params, function (error, data) {
+    if (error) {
+      console.log(error)
+      const message =
+        error.code === 'ConditionalCheckFailedException'
+          ? 'could not find item with id: '
+          : 'could not update item with id: '
+
+      return res.status(400).json({ error: message + todoId })
+    } else {
+      return res.json(data.item)
+    }
   })
 })
 
