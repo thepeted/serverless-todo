@@ -22,7 +22,7 @@ app.get('/todos', (req, res) => {
   dynamoDb.scan(params, (error, data) => {
     if (error) {
       console.log(error)
-      return res.status(404).json({ error: 'Could not get todos' })
+      return res.status(500).json({ error: 'Could not get todos' })
     } else {
       return res.json(data.Items)
     }
@@ -73,10 +73,10 @@ app.post('/todos', (req, res) => {
     Item: item
   }
 
-  dynamoDb.put(params, (error) => {
+  dynamoDb.put(params, error => {
     if (error) {
       console.log(error)
-      return res.status(400).json({ error: 'Could not create todo' })
+      return res.status(500).json({ error: 'Could not create todo' })
     }
     res.json(item)
   })
@@ -102,14 +102,13 @@ app.put('/todos/:todoId', (req, res) => {
   dynamoDb.update(params, (error, data) => {
     if (error) {
       console.log(error)
-      const message =
-        error.code === 'ConditionalCheckFailedException'
-          ? 'could not find item with id: '
-          : 'could not update item with id: '
-
-      return res.status(400).json({ error: message + todoId })
+      if (error.code === 'ConditionalCheckFailedException') {
+        return res.status(404).json({ error: 'could not find item to update with id: ' + todoId })
+      } else {
+        return res.status(500).json({ error: 'could not update item with id: ' + todoId })
+      }
     } else {
-      return res.json(data.item)
+      return res.json(data.Attributes)
     }
   })
 })
@@ -128,7 +127,11 @@ app.delete('/todos/:todoId', (req, res) => {
   dynamoDb.delete(params, (error) => {
     if (error) {
       console.log(error)
-      return res.status(500).json({ error: 'Could not delete todo with id: ' + todoId })
+      if (error.code === 'ConditionalCheckFailedException') {
+        return res.status(404).json({ error: 'could not find item to delete with id: ' + todoId })
+      } else {
+        return res.status(500).json({ error: 'could not delete item with id: ' + todoId })
+      }
     }
     return res.sendStatus(204)
   })
