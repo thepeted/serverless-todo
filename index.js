@@ -64,7 +64,7 @@ app.post('/todos', (req, res) => {
 
   const item = {
     todoId: uuidv1(),
-    timestamp: new Date().getTime(),
+    createdDate: new Date().getTime(),
     completed,
     text
   }
