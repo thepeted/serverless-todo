@@ -5,6 +5,8 @@ const app = express()
 const AWS = require('aws-sdk')
 const uuidv1 = require('uuid/v1')
 
+const isValidBody = require('./utils/isValidBody')
+
 const TODOS_TABLE = process.env.TODOS_TABLE
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
@@ -57,7 +59,7 @@ app.post('/todos', function (req, res) {
   // validate body
   if (
     completed === undefined || text === undefined ||
-    typeof completed !== 'boolean' || typeof text !== 'string'
+    !isValidBody(req.body)
   ) {
     return res.status(400).json({ error: 'request body must contain valid "completed" and "text" values' })
   }
