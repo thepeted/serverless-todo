@@ -14,7 +14,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient()
 app.use(bodyParser.json({ strict: false }))
 
 // Get all todos
-app.get('/todos', function (req, res) {
+app.get('/todos', (req, res) => {
   const params = {
     TableName: TODOS_TABLE
   }
@@ -30,7 +30,7 @@ app.get('/todos', function (req, res) {
 })
 
 // Get a single todo
-app.get('/todos/:todoId', function (req, res) {
+app.get('/todos/:todoId', (req, res) => {
   const { todoId } = req.params
   const params = {
     TableName: TODOS_TABLE,
@@ -54,7 +54,7 @@ app.get('/todos/:todoId', function (req, res) {
 })
 
 // Create todo
-app.post('/todos', function (req, res) {
+app.post('/todos', (req, res) => {
   const { completed, text } = req.body
 
   // validate body
@@ -86,7 +86,7 @@ app.post('/todos', function (req, res) {
 })
 
 // Update todo
-app.put('/todos/:todoId', function (req, res) {
+app.put('/todos/:todoId', (req, res) => {
   if (!isValidBody(req.body)) {
     return res.status(400).json({ error: 'request body must contain valid values' })
   }
@@ -102,7 +102,7 @@ app.put('/todos/:todoId', function (req, res) {
     ...generateUpdateParams(req.body)
   }
 
-  dynamoDb.update(params, function (error, data) {
+  dynamoDb.update(params, (error, data) => {
     if (error) {
       console.log(error)
       const message =
@@ -118,7 +118,7 @@ app.put('/todos/:todoId', function (req, res) {
 })
 
 // Delete todo
-app.delete('/todos/:todoId', function (req, res) {
+app.delete('/todos/:todoId', (req, res) => {
   const { todoId } = req.params
   const params = {
     TableName: TODOS_TABLE,
