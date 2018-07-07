@@ -5,26 +5,34 @@ A [Serverless](https://serverless.com) RESTful API built with express.js for man
 
 ## Example API Usage
 
-`$ curl {BASE_DOMAIN}/todos/`
-returns all todos
+```
+$ curl {BASE_DOMAIN}/todos/
+```
+returns all todos:
 ```
 [
   {
     "completed": true,
     "todoId": "6a436cd0-809b-11e8-800d-f7533ca38f29",
     "text": "do something awesome",
-    "timestamp": 1530826562589
+    "createdDate": 1530826562589
   }
 ]
+
+fetch a single todo:
+```
+curl {BASE_DOMAIN}/todos/{id}
+```
 
 ```
 add a todo:
 ```
-$ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/todos -d '{"completed": true, "text": "use uuid"}'`
+$ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/todos -d '{"completed": true, "text": "do something"}'`
 ```
-fetch a single todo:
+
+update a todo:
 ```
-curl {BASE_DOMAIN}/todos/{id}
+$curl -H "Content-Type: application/json" -X PUT ${BASE_DOMAIN}/todos/{id} '{"text:" "do something awesome"}'
 ```
 
 delete a todo:
