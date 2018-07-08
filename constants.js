@@ -2,6 +2,7 @@ const types = {
   todoId: 'string',
   completed: 'boolean',
   text: 'string',
+  createdDate: 'number'
 }
 
 module.exports = {

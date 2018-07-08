@@ -55,7 +55,7 @@ app.get('/todos/:todoId', (req, res) => {
 
 // Create todo
 app.post('/todos', (req, res) => {
-  const { completed = false, text, todoId } = req.body
+  const { completed = false, text, todoId, createdDate } = req.body
 
   // validate request body
   if (text === undefined) {
@@ -67,7 +67,7 @@ app.post('/todos', (req, res) => {
 
   const item = {
     todoId: todoId || uuidv1(),
-    createdDate: new Date().getTime(),
+    createdDate: createdDate || new Date().getTime(),
     completed,
     text
   }
