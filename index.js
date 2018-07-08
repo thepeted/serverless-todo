@@ -55,15 +55,18 @@ app.get('/todos/:todoId', (req, res) => {
 
 // Create todo
 app.post('/todos', (req, res) => {
-  const { completed = false, text } = req.body
+  const { completed = false, text, todoId } = req.body
 
-  // validate body
-  if (text === undefined || !isValidBody(req.body)) {
-    return res.status(400).json({ error: 'request body must contain valid "completed" and "text" values' })
+  // validate request body
+  if (text === undefined) {
+    return res.status(400).json({ error: 'request body must contain a text value' })
+  }
+  if (!isValidBody(req.body)) {
+    return res.status(400).json({ error: 'request body must contain valid values' })
   }
 
   const item = {
-    todoId: uuidv1(),
+    todoId: todoId || uuidv1(),
     createdDate: new Date().getTime(),
     completed,
     text

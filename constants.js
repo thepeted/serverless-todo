@@ -1,7 +1,7 @@
 const types = {
   todoId: 'string',
   completed: 'boolean',
-  text: 'string'
+  text: 'string',
 }
 
 module.exports = {
