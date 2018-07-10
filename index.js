@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const AWS = require('aws-sdk')
 const uuidv1 = require('uuid/v1')
+const cors = require('cors')
 
 const generateUpdateParams = require('./utils/generateUpdateParams')
 const isValidBody = require('./utils/isValidBody')
@@ -12,6 +13,7 @@ const TODOS_TABLE = process.env.TODOS_TABLE
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
 app.use(bodyParser.json({ strict: false }))
+app.use(cors())
 
 // Get all todos
 app.get('/todos', (req, res) => {
