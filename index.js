@@ -73,13 +73,18 @@ app.post('/todos', (req, res) => {
   }
   const params = {
     TableName: TODOS_TABLE,
-    Item: item
+    Item: item,
+    ConditionExpression: 'attribute_not_exists(todoId)'
   }
 
   dynamoDb.put(params, error => {
     if (error) {
       console.log(error)
-      return res.status(400).json({ error: 'Could not create todo' })
+      if (error.code === 'ConditionalCheckFailedException') {
+        return res.status(400).json({ error: 'Could not create todo because id ' + todoId + ' already exists' })
+      } else {
+        return res.status(400).json({ error: 'Could not create todo' })
+      }
     }
     res.json(item)
   })
