@@ -18,13 +18,14 @@ returns all todos:
     "createdDate": 1530826562589
   }
 ]
+```
 
 fetch a single todo:
 ```
 curl {BASE_DOMAIN}/todos/{id}
 ```
 
-```
+
 add a todo:
 ```
 $ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/todos -d '{"completed": true, "text": "do something"}'`
