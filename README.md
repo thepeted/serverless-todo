@@ -6,7 +6,7 @@ A [Serverless](https://serverless.com) RESTful API built with express.js for man
 ## Example API Usage
 
 ```
-$ curl {BASE_DOMAIN}/todos/
+$ curl ${BASE_DOMAIN}/todos/
 ```
 returns all todos:
 ```
@@ -22,7 +22,7 @@ returns all todos:
 
 fetch a single todo:
 ```
-curl {BASE_DOMAIN}/todos/{id}
+curl ${BASE_DOMAIN}/todos/{id}
 ```
 
 
@@ -38,7 +38,7 @@ $curl -H "Content-Type: application/json" -X PUT ${BASE_DOMAIN}/todos/{id} '{"te
 
 delete a todo:
 ```
-curl -X DELETE {BASE_DOMAIN}/todos/{id}
+curl -X DELETE ${BASE_DOMAIN}/todos/{id}
 ```
 
 ## Build and Deploy
