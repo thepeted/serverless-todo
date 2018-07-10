@@ -43,6 +43,8 @@ curl -X DELETE ${BASE_DOMAIN}/todos/{id}
 
 ## Build and Deploy
 
+Prerequisite: Recent Node.js environment
+Installed and configured [Serverless](https://serverless.com)
 ```
 npm install -g serverless
 npm install
